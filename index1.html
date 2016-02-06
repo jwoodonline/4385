@@ -15,35 +15,174 @@
                     
                     var cc = this;
                     
-                    cc.cost = 0.00;
-                    cc.add_tax = true;
+                    cc.cost = 0.000;
+                    //cc.add_tax = true;
                     cc.total_bill = true;
                     
-                    function update(){
-                       cc.tax = cc.add_tax ? cc.cost * 0.15 : 0.0;    
-                       cc.total = parseFloat(cc.cost) + cc.tax + cc.shipping.amount; 
-                    }
+                    
+                    
+                    cc.update = function(){
+                       
+                       // This expression currently does the following:
+                       // You previously assigned an object from the array Tip_options to the variable cc.Tip
+                       // Now, you are changing the cc.Tip.amount property of Tip to equal the calculated tip
+                       // Consider creating a new variable, such as cc.TipAmount and assigning the value instead
+                       // Also, while cc.cost is a number, cc.options is an entire array? Multiplying a number by an array
+                       // doesn't make sense?
+                       cc.TipAmount = Number(cc.cost) * cc.Tip.amount;  // Make sure you also parseFloat(cc.cost) here as well
+                       // When ever you store a value from an html <input /> box, the value is a string. So you have to convert it
+                       // from a string to a number, like in C# we had to convert the Console.ReadLine using Convert.ToInt32()
+                       // cc.TipAmount = cc.cost * cc.Tip.amount might work?
+                       
+                       // Similar situation as lines 26-29
+                       cc.NAmount = Number(cc.cost) * cc.N.amount; // parse cc.cost here as well
+                       // Try a similar expression as line 33
+                       
+                       
+                       
+                       cc.total = Number(cc.cost) + cc.NAmount + cc.TipAmount;
+                       // instead of Tip.amount and N.amount, use the new variables
+                    };
                     
                     //used to detect when cost changes
-                    $scope.$watch('cc.cost', update);
-                    $scope.$watch('cc.add_tax', update);
-                    $scope.$watch('cc.shipping', update);
-                    $scope.$watch('cc.cost + cc.tax', update);
+                    //$scope.$watch('cc.cost', update);
+                    //$scope.$watch('cc.add_tax', update);
+                    //$scope.$watch('cc.TipAmount', update);
+                    //$scope.$watch('cc.NAmount', update);
+                    //$scope.$watch('cc.cost + cc.tax', update);
+                  
                     
                     //final bill
-                    cc.final_bill = 0.0;
+                    // cc.final_bill and cc.add are unnecessary?
+                    /*cc.final_bill = 0.0;
                     cc.add = function add(){
-                        cc.final_bill += cc.total;   
-                    }
-                    
+                        cc.final_bill = cc.total;   
+                    };
+                    */
                     //shipping options
-                    cc.shipping_options = [
-                        {amount:10.0, name:"Flat Rate"},
-                        {amount:20.0, name:"Ex111ress"},
-                        {amount:30.0, name:"Super Express"}
+                    cc.Tip_options = [
+                        {amount:0.00, name:""},
+                        {amount:0.10, name:"10%"},
+                        {amount:0.15, name:"15%"},
+                        {amount:0.20, name:"20%"},
+                       
+                       /* {amount:00.500, name:"Alabama"},*/
                     ];
                     
-                    cc.shipping = cc.shipping_options[0];
+                   
+                
+                
+                
+                 cc.N_options = [
+                        
+                        {amount:0.000, name:"   "},
+                        {amount:0.040, name:"Alabama"},
+                        {amount:0.000, name:"Alaska"},
+                        {amount:0.056, name:"Arizona"},
+                        {amount:0.065, name:"Arkansas"},
+                        {amount:0.075, name:"California"},
+                        {amount:0.029, name:"Colorado"},
+                        {amount:0.000, name:"Delaware"},
+                        {amount:0.060, name:"Florida"},
+                        {amount:0.040, name:"Georgia"},
+                        {amount:0.040, name:"Hawaii"},
+                        {amount:0.060, name:"Idaho"},
+                        {amount:0.063, name:"Illinois"},
+                        {amount:0.070, name:"Indiana"},
+                        {amount:0.060, name:"Iowa"},
+                        {amount:0.065, name:"Kansas"},
+                        {amount:0.060, name:"Kentucky"},
+                        {amount:0.600, name:"Louisiana"},
+                        {amount:0.055, name:"Maine"},
+                        {amount:0.060, name:"Maryland"},
+                        {amount:0.063, name:"Massachusetts"},
+                        {amount:0.060, name:"Michigan"},
+                        {amount:0.069, name:"Minnesota"},
+                        {amount:0.070, name:"Mississippi"},
+                        {amount:0.042, name:"Missouri"},
+                        {amount:0.000, name:"Montana"},
+                        {amount:0.055, name:"Nebraska"},
+                        {amount:0.069, name:"Nevada"},
+                        {amount:0.000, name:"New Hampshire"},
+                        {amount:0.070, name:"New Jersey"},
+                        {amount:0.051, name:"New Mexico"},
+                        {amount:0.040, name:"New York"},
+                        {amount:0.048, name:"North Carolina"},
+                        {amount:0.048, name:"North Dakota"},
+                        {amount:0.058, name:"Ohio"},
+                        {amount:0.045, name:"Oklahoma"},
+                        {amount:0.000, name:"Oregon"},
+                        {amount:0.060, name:"Pennsylvania"},
+                        {amount:0.070, name:"Rhode Island"},
+                        {amount:0.060, name:"South Carolina"},
+                        {amount:0.040, name:"South Dakota"},
+                        {amount:0.040, name:"Tennessee"},
+                        {amount:0.063, name:"Texas"},
+                        {amount:0.047, name:"Utah"},
+                        {amount:0.060, name:"Vermont"},
+                        {amount:0.043, name:"Virginia"},
+                        {amount:0.065, name:"Washington"},
+                        {amount:0.060, name:"West Virginia"},
+                        {amount:0.050, name:"Wisconsin"},
+                        {amount:0.040, name:"Wyoming"},
+                    
+                    ];
+                    
+                    // cc.N = cc.N_options[0];
+                    
+                    /*cc.Tax_options = [
+                        {amount:0.040, name"Alabama"},
+                        {amount:0.000, name:"Alaska"},
+                        {amount:0.056, name:"Arizona"},
+                        {amount:0.065, name:"Arkansas"},
+                        {amount:0.075, name:"California"},
+                        {amount:0.029, name:"Colorado"},
+                        {amount:0.064, name:"Connecticut"},
+                        {amount:0.000, name:"Delaware"},
+                        {amount:0.060, name:"Florida"},
+                        {amount:0.040, name:"Georgia"},
+                        {amount:0.040, name:"Hawaii"},
+                        {amount:0.060, name:"Idaho"},
+                        {amount:0.063, name:"Illinois"},
+                        {amount:0.070, name:"Indiana"},
+                        {amount:0.060, name:"Iowa"},
+                        {amount:0.065, name:"Kansas"},
+                        {amount:0.060, name:"Kentucky"},
+                        {amount:0.600, name:"Louisiana"},
+                        {amount:0.055, name:"Maine"},
+                        {amount:0.060, name:"Maryland"},
+                        {amount:0.063, name:"Massachusetts"},
+                        {amount:0.060, name:"Michigan"},
+                        {amount:0.069, name:"Minnesota"},
+                        {amount:0.070, name:"Mississippi"},
+                        {amount:0.042, name:"Missouri"},
+                        {amount:0.000, name:"Montana"},
+                        {amount:0.055, name:"Nebraska"},
+                        {amount:0.069, name:"Nevada"},
+                        {amount:0.000, name:"New Hampshire"},
+                        {amount:0.070, name:"New Jersey"},
+                        {amount:0.051, name:"New Mexico"},
+                        {amount:0.040, name:"New York"},
+                        {amount:0.048, name:"North Carolina"},
+                        {amount:0.048, name:"North Dakota"},
+                        {amount:0.058, name:"Ohio"},
+                        {amount:0.045, name:"Oklahoma"},
+                        {amount:0.000, name:"Oregon"},
+                        {amount:0.060, name:"Pennsylvania"},
+                        {amount:0.070, name:"Rhode Island"},
+                        {amount:0.060, name:"South Carolina"},
+                        {amount:0.040, name:"Tennessee"},
+                        {amount:0.063, name:"Texas"},
+                        {amount:0.047, name:"Utah"},
+                        {amount:0.060, name:"Vermont"},
+                        {amount:0.043, name:"Virginia"},
+                        {amount:0.065, name:"Washington"},
+                        {amount:0.060, name:"West Virginia"},
+                        {amount:0.050, name:"Wisconsin"},
+                        {amount:0.040, name:"Wyoming"},
+                    ];
+                    
+                     cc.Taxx = cc.Tax_option[0];*/
                     
                     
                 }
@@ -52,27 +191,36 @@
     </head>
     <body>
         <div ng-controller="CostController as cc">
-            <input type="checkbox" ng-model="cc.add_tax" />Add Tax
-            <input type="checkbox" ng-model="cc.total_bill" />Show Total
+            
             <p>
-                Cost: <input type="text" ng-model="cc.cost" placeholder="cost" /><br/>
-                Shipping: <select ng-model="cc.shipping" ng-options="s.name for s in cc.shipping_options"></select>
+                Cost: <input type="text" ng-change="cc.update()" ng-model="cc.cost" placeholder="cost" /><br/> <!-- okay -->
+                
+                <!-- original: cc.Tip.amount -->
+                Tip: <select ng-model="cc.Tip" ng-change="cc.update()" ng-options="T.name for T in cc.Tip_options"></select>
+                <!-- original: cc.N.amount -->Tax: <select ng-model="cc.N" ng-change="cc.update()" ng-options="N.name for N in cc.N_options"></select>
             </p>
             <p>
                 <!-- the angular directive both associates with the cost model and
                 uses a built-in formatting capability -->
                 This is your cost: {{cc.cost|currency}}
             </p>
+            <!-- <p>tip percentage: {{ cc.Tip.amount }}</p>
+            <p>tax percentage: {{ cc.N.amount }}</p> -->
             <p>
-                This is your tax: {{cc.tax|currency}}
+                This is your tax: {{cc.NAmount|currency}} <!-- use a new variable here instead to store the calculated tax -->
+                
             </p>
-            <p ng-show="cc.total_bill">
+          <p>
+                This is your tip: {{cc.TipAmount|currency}} <!-- use a new variable here instead to store the calculated tip -->
+                
+            </p>
+          
+            <p> <!-- original: ng-show="cc.total_bill" -->
                 This is your total: {{cc.total|currency}}
-                <button ng-click="cc.add()">Add</button>
+                <!-- <button ng-click="cc.add()">Add</button> -->
             </p>
-            <p ng-show="cc.total_bill">
-                Your running total is {{cc.final_bill|currency}}
-            </p>
-        </div>
+           
+            
+        </div
     </body>
 </html>
