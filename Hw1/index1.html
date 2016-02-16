@@ -1,0 +1,212 @@
+<!-- this is an AngularJS View Template -->
+<!-- it is necessary to create a module into which we place our ng-app -->
+<html ng-app="AngularJSExample">
+    <head>
+        <!-- from Google Hosted Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular.min.js"></script>
+        <script lang="javascript">
+        
+            var myModule = angular.module('AngularJSExample', []);
+            
+            //first register the controller - https://docs.angularjs.org/guide/migration
+            myModule.controller('CostController', 
+                //we make an AngularJS controller right here in the template (we won't normally do this though)
+                function ($scope) {
+                    
+                    var cc = this;
+                    
+                    cc.cost = 0.000;
+                    //cc.add_tax = true;
+                    cc.total_bill = true;
+                    
+                    
+                    
+                    cc.update = function(){
+                       
+                      
+                       cc.TipAmount = Number(cc.cost) * cc.Tip.amount;  
+                       cc.NAmount = Number(cc.cost) * cc.N.amount; 
+                
+                       cc.total = Number(cc.cost) + cc.NAmount + cc.TipAmount;
+                   
+                    };
+                    
+                    //used to detect when cost changes
+                    //$scope.$watch('cc.cost', update);
+                    //$scope.$watch('cc.add_tax', update);
+                    //$scope.$watch('cc.TipAmount', update);
+                    //$scope.$watch('cc.NAmount', update);
+                    //$scope.$watch('cc.cost + cc.tax', update);
+                  
+                    
+                    //final bill
+                    // cc.final_bill and cc.add are unnecessary?
+                    /*cc.final_bill = 0.0;
+                    cc.add = function add(){
+                        cc.final_bill = cc.total;   
+                    };
+                    */
+                    //shipping options
+                    cc.Tip_options = [
+                        {amount:0.00, name:""},
+                        {amount:0.10, name:"10%"},
+                        {amount:0.15, name:"15%"},
+                        {amount:0.20, name:"20%"},
+                       
+                       /* {amount:00.500, name:"Alabama"},*/
+                    ];
+                    
+                   
+                
+                
+                
+                 cc.N_options = [
+                        
+                        {amount:0.000, name:"   "},
+                        {amount:0.040, name:"Alabama"},
+                        {amount:0.000, name:"Alaska"},
+                        {amount:0.056, name:"Arizona"},
+                        {amount:0.065, name:"Arkansas"},
+                        {amount:0.075, name:"California"},
+                        {amount:0.029, name:"Colorado"},
+                        {amount:0.000, name:"Delaware"},
+                        {amount:0.060, name:"Florida"},
+                        {amount:0.040, name:"Georgia"},
+                        {amount:0.040, name:"Hawaii"},
+                        {amount:0.060, name:"Idaho"},
+                        {amount:0.063, name:"Illinois"},
+                        {amount:0.070, name:"Indiana"},
+                        {amount:0.060, name:"Iowa"},
+                        {amount:0.065, name:"Kansas"},
+                        {amount:0.060, name:"Kentucky"},
+                        {amount:0.600, name:"Louisiana"},
+                        {amount:0.055, name:"Maine"},
+                        {amount:0.060, name:"Maryland"},
+                        {amount:0.063, name:"Massachusetts"},
+                        {amount:0.060, name:"Michigan"},
+                        {amount:0.069, name:"Minnesota"},
+                        {amount:0.070, name:"Mississippi"},
+                        {amount:0.042, name:"Missouri"},
+                        {amount:0.000, name:"Montana"},
+                        {amount:0.055, name:"Nebraska"},
+                        {amount:0.069, name:"Nevada"},
+                        {amount:0.000, name:"New Hampshire"},
+                        {amount:0.070, name:"New Jersey"},
+                        {amount:0.051, name:"New Mexico"},
+                        {amount:0.040, name:"New York"},
+                        {amount:0.048, name:"North Carolina"},
+                        {amount:0.048, name:"North Dakota"},
+                        {amount:0.058, name:"Ohio"},
+                        {amount:0.045, name:"Oklahoma"},
+                        {amount:0.000, name:"Oregon"},
+                        {amount:0.060, name:"Pennsylvania"},
+                        {amount:0.070, name:"Rhode Island"},
+                        {amount:0.060, name:"South Carolina"},
+                        {amount:0.040, name:"South Dakota"},
+                        {amount:0.040, name:"Tennessee"},
+                        {amount:0.063, name:"Texas"},
+                        {amount:0.047, name:"Utah"},
+                        {amount:0.060, name:"Vermont"},
+                        {amount:0.043, name:"Virginia"},
+                        {amount:0.065, name:"Washington"},
+                        {amount:0.060, name:"West Virginia"},
+                        {amount:0.050, name:"Wisconsin"},
+                        {amount:0.040, name:"Wyoming"},
+                    
+                    ];
+                    
+                    // cc.N = cc.N_options[0];
+                    
+                    /*cc.Tax_options = [
+                        {amount:0.040, name"Alabama"},
+                        {amount:0.000, name:"Alaska"},
+                        {amount:0.056, name:"Arizona"},
+                        {amount:0.065, name:"Arkansas"},
+                        {amount:0.075, name:"California"},
+                        {amount:0.029, name:"Colorado"},
+                        {amount:0.064, name:"Connecticut"},
+                        {amount:0.000, name:"Delaware"},
+                        {amount:0.060, name:"Florida"},
+                        {amount:0.040, name:"Georgia"},
+                        {amount:0.040, name:"Hawaii"},
+                        {amount:0.060, name:"Idaho"},
+                        {amount:0.063, name:"Illinois"},
+                        {amount:0.070, name:"Indiana"},
+                        {amount:0.060, name:"Iowa"},
+                        {amount:0.065, name:"Kansas"},
+                        {amount:0.060, name:"Kentucky"},
+                        {amount:0.600, name:"Louisiana"},
+                        {amount:0.055, name:"Maine"},
+                        {amount:0.060, name:"Maryland"},
+                        {amount:0.063, name:"Massachusetts"},
+                        {amount:0.060, name:"Michigan"},
+                        {amount:0.069, name:"Minnesota"},
+                        {amount:0.070, name:"Mississippi"},
+                        {amount:0.042, name:"Missouri"},
+                        {amount:0.000, name:"Montana"},
+                        {amount:0.055, name:"Nebraska"},
+                        {amount:0.069, name:"Nevada"},
+                        {amount:0.000, name:"New Hampshire"},
+                        {amount:0.070, name:"New Jersey"},
+                        {amount:0.051, name:"New Mexico"},
+                        {amount:0.040, name:"New York"},
+                        {amount:0.048, name:"North Carolina"},
+                        {amount:0.048, name:"North Dakota"},
+                        {amount:0.058, name:"Ohio"},
+                        {amount:0.045, name:"Oklahoma"},
+                        {amount:0.000, name:"Oregon"},
+                        {amount:0.060, name:"Pennsylvania"},
+                        {amount:0.070, name:"Rhode Island"},
+                        {amount:0.060, name:"South Carolina"},
+                        {amount:0.040, name:"Tennessee"},
+                        {amount:0.063, name:"Texas"},
+                        {amount:0.047, name:"Utah"},
+                        {amount:0.060, name:"Vermont"},
+                        {amount:0.043, name:"Virginia"},
+                        {amount:0.065, name:"Washington"},
+                        {amount:0.060, name:"West Virginia"},
+                        {amount:0.050, name:"Wisconsin"},
+                        {amount:0.040, name:"Wyoming"},
+                    ];
+                    
+                     cc.Taxx = cc.Tax_option[0];*/
+                    
+                    
+                }
+            );
+        </script>
+    </head>
+    <body>
+        <div ng-controller="CostController as cc">
+            
+            <p>
+                Cost: <input type="text" ng-change="cc.update()" ng-model="cc.cost" placeholder="cost" /><br/>
+                
+                <!-- original: cc.Tip.amount -->
+                Tip: <select ng-model="cc.Tip" ng-change="cc.update()" ng-options="T.name for T in cc.Tip_options"></select>
+           Tax: <select ng-model="cc.N" ng-change="cc.update()" ng-options="N.name for N in cc.N_options"></select>
+            </p>
+            <p>
+               
+                This is your cost: {{cc.cost|currency}}
+            </p>
+            <!-- <p>tip percentage: {{ cc.Tip.amount }}</p>
+            <p>tax percentage: {{ cc.N.amount }}</p> -->
+            <p>
+                This is your tax: {{cc.NAmount|currency}}
+                
+            </p>
+          <p>
+                This is your tip: {{cc.TipAmount|currency}}
+                
+            </p>
+          
+            <p> <!-- original: ng-show="cc.total_bill" -->
+                This is your total: {{cc.total|currency}}
+                
+            </p>
+           
+            
+        </div>
+    </body>
+</html>
