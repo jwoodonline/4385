@@ -1,0 +1,22 @@
+[  
+      {  
+         "question":"What is the lastest version of HTML?",
+         "answer":"HTML5"
+      },
+      {  
+         "question":"Is Ionic used for creating mobile apps?",
+         "answer":"yes"
+      },
+      {  
+         "question":"Is bootstrap a computer language?",
+         "answer":"no"
+      },
+      {  
+         "question":"Name a c# loop?",
+         "answer":"If, For, while"
+      },
+      {  
+         "question":"What computer language is the backwork for ASp.Net?",
+         "answer":"c#(Csharp)"
+      }
+   ]
